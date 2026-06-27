@@ -64,15 +64,15 @@ Comments
 > The SELECT statement retrieves data from one or more database tables
 
 Basic Syntax
-     SELECT column1, column2, ...
+ >    SELECT column1, column2, ...
      FROM table_name;
 
 1. Select all columns
-     SELECT * 
+  >   SELECT * 
      FROM employees
 
 2. Select all columns
-     SELECT name, salary
+   >  SELECT name, salary
      FROM employees
 
 3. Select with a condition
