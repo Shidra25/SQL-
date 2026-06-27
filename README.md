@@ -409,12 +409,24 @@ SELECT name,
 FROM employees
 WHERE salary BETWEEN 60000 AND 90000;
 ```
+>Equivalent to:
+```sql
+WHERE salary >= 60000
+AND salary <= 90000;
+```
+
 ### 10: WHERE with IN
 ```sql
 SELECT name,
        department
 FROM employees
 WHERE department IN ('Engineering', 'HR', 'Finance');
+```
+>Equivalent to:
+```sql
+WHERE department='Engineering'
+OR department='HR'
+OR department='Finance';
 ```
 ### 11: WHERE with NOT IN
 ```sql
@@ -427,6 +439,25 @@ WHERE department NOT IN ('HR', 'Marketing');
 SELECT *
 FROM employees
 WHERE name LIKE 'A%';
+```
+> Names ending with 'n'.
+```sql
+SELECT *
+FROM employees
+WHERE name LIKE '%n';
+```
+>Names containing 'ar'.
+```sql
+SELECT *
+FROM employees
+WHERE name LIKE '%ar%';
+```
+>Exactly five characters.
+```sql
+---(_ represents one character.)
+SELECT *
+FROM employees
+WHERE name LIKE '_____';
 ```
 ### 13: WHERE with IS NULL
 ```sql
@@ -495,8 +526,8 @@ HAVING AVG(salary) > 70000;
 ---
 
 ## DISTINCT
-
 ...
+>The DISTINCT clause is used to remove duplicate rows from the result set. It returns only unique values.
 
 ---
 
