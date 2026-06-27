@@ -11,6 +11,7 @@
 - [TOP / LIMIT](#top--limit)
 - [Aliases](#aliases)
 - [Comments](#comments)
+- [Execution Order](#SQl--Logically--Process)
 
 ### Part 2: Filtering & Operators
 - [AND](#and)
@@ -172,7 +173,7 @@ ORDER BY salary DESC;
 ## FROM
 >The FROM clause specifies which table (or tables) SQL should retrieve data from.
 ...
-## Syntax
+### Syntax
 ```sql
 SELECT column1, column2, ...
 FROM table_name;
@@ -204,8 +205,56 @@ WHERE Salary > 55000;
 SELECT e.Name, e.Salary
 FROM Employees AS e;
 ```
+>Here, e is an alias (short name) for the Employees table.
 
+### 5. Multiple Tables (JOIN)
+```sql
+SELECT e.Name, d.DepartmentName
+FROM Employees e
+JOIN Departments d
+ON e.DepartmentID = d.DepartmentID;
+```
+> This works but is not recommended. Always use explicit JOIN syntax.
 
+### 6. Multiple Tables (JOIN)
+
+```sql
+SELECT e.Name, d.DepartmentName
+FROM Employees e, Departments d
+WHERE e.DepartmentID = d.DepartmentID;
+```
+
+### 7. FROM with a Subquery
+```sql
+SELECT Name, Salary
+FROM (
+    SELECT Name, Salary
+    FROM Employees
+    WHERE Department = 'IT'
+) AS IT_Employees;
+```
+
+### 8. FROM with a Common Table Expression (CTE)
+```sql
+WITH HighSalary AS (
+    SELECT *
+    FROM Employees
+    WHERE Salary > 60000
+)
+SELECT Name, Salary
+FROM HighSalary;
+```
+### 9. FROM with Multiple Joins
+```sql
+SELECT e.Name,
+       d.DepartmentName,
+       m.Name AS Manager
+FROM Employees e
+JOIN Departments d
+    ON e.DepartmentID = d.DepartmentID
+JOIN Employees m
+    ON e.ManagerID = m.EmployeeID;
+```
 ---
 
 ## WHERE
