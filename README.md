@@ -172,10 +172,28 @@ ORDER BY salary DESC;
 ## FROM
 >The FROM clause specifies which table (or tables) SQL should retrieve data from.
 ...
+## Syntax
 ```sql
 SELECT column1, column2, ...
 FROM table_name;
 ```
+
+> SELECT → Chooses the columns to display.
+> FROM → Specifies the table containing the data.
+
+### 1. Select all columns
+ ```sql
+
+SELECT *
+FROM Employees;
+```
+### 2: Select specific columns
+```sql
+SELECT Name, Salary
+FROM Employees;
+```
+
+
 ---
 
 ## WHERE
