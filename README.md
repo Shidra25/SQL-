@@ -3,7 +3,7 @@
 ## 📑 Table of Contents
 
 ### Part 1: SQL Basics
-- [Logical Execution Order](#SQL_steps_to_process)
+- [Logical Execution Order](#SQL_Process_in_Order)
 - [SELECT](#select)
 - [FROM](#from)
 - [WHERE](#where)
@@ -120,7 +120,7 @@
 
 # Part 1: SQL Basics
 
-### SQL_steps_to_process
+### SQL Process in Order
 ```sql
 > FROM employees
 > WHERE salary > 60000
