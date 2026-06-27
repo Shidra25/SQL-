@@ -121,6 +121,7 @@
 # Part 1: SQL Basics
 
 ### SQL_steps_to_process
+```sql
 > FROM employees
 > WHERE salary > 60000
 > GROUP BY (if present)
@@ -129,6 +130,7 @@
 > DISTINCT (if present)
 > ORDER BY salary DESC
 > LIMIT / OFFSET
+```
 ---
 ## SELECT
 
