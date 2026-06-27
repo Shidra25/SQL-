@@ -11,7 +11,6 @@
 - [TOP / LIMIT](#top--limit)
 - [Aliases](#aliases)
 - [Comments](#comments)
-- [Execution Order](#SQl--Logically--Process)
 
 ### Part 2: Filtering & Operators
 - [AND](#and)
@@ -120,6 +119,17 @@
 
 # Part 1: SQL Basics
 
+### SQL processes it in this order:
+---
+> FROM employees
+> WHERE salary > 60000
+> GROUP BY (if present)
+> HAVING (if present)
+> SELECT
+> DISTINCT (if present)
+> ORDER BY salary DESC
+> LIMIT / OFFSET
+---
 ## SELECT
 
 > The `SELECT` statement retrieves data from one or more database tables.
@@ -182,7 +192,7 @@ FROM table_name;
 > SELECT → Chooses the columns to display.
 > FROM → Specifies the table containing the data.
 
-### 1. Select all columns
+### 1. Select from
  ```sql
 
 SELECT *
@@ -209,51 +219,59 @@ FROM Employees AS e;
 
 ### 5. Multiple Tables (JOIN)
 ```sql
-SELECT e.Name, d.DepartmentName
-FROM Employees e
-JOIN Departments d
-ON e.DepartmentID = d.DepartmentID;
+SELECT e.name,
+       d.departmentname,
+       d.budget
+FROM employees e,
+     "Departments" d
+WHERE e.department = d.departmentname;
 ```
 > This works but is not recommended. Always use explicit JOIN syntax.
 
-### 6. Multiple Tables (JOIN)
+### 6. FROM with Multiple Tables
 
 ```sql
-SELECT e.Name, d.DepartmentName
-FROM Employees e, Departments d
-WHERE e.DepartmentID = d.DepartmentID;
+SELECT e.name,
+       d.departmentname,
+       d.budget
+FROM employees e,
+     "Departments" d
+WHERE e.department = d.departmentname;
 ```
 
 ### 7. FROM with a Subquery
 ```sql
-SELECT Name, Salary
-FROM (
-    SELECT Name, Salary
-    FROM Employees
-    WHERE Department = 'IT'
-) AS IT_Employees;
+SELECT name,
+       salary
+FROM
+(
+    SELECT name,
+           salary
+    FROM employees
+    WHERE salary > 70000
+) AS HighSalaryEmployees;
 ```
 
 ### 8. FROM with a Common Table Expression (CTE)
 ```sql
-WITH HighSalary AS (
+WITH HighSalaryEmployees AS
+(
     SELECT *
-    FROM Employees
-    WHERE Salary > 60000
+    FROM employees
+    WHERE salary > 70000
 )
-SELECT Name, Salary
-FROM HighSalary;
+SELECT name,
+       salary,
+       department
+FROM HighSalaryEmployees;
 ```
-### 9. FROM with Multiple Joins
+### 9. FROM with Self Join (Employee → Manager)
 ```sql
-SELECT e.Name,
-       d.DepartmentName,
-       m.Name AS Manager
-FROM Employees e
-JOIN Departments d
-    ON e.DepartmentID = d.DepartmentID
-JOIN Employees m
-    ON e.ManagerID = m.EmployeeID;
+SELECT e.name AS Employee,
+       m.name AS Manager
+FROM employees e
+LEFT JOIN employees m
+ON e.managerid = m.employeesid;
 ```
 ---
 
