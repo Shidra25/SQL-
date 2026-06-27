@@ -170,8 +170,10 @@ ORDER BY salary DESC;
 ---
 
 ## FROM
-
-...
+>The FROM clause specifies which table (or tables) SQL should retrieve data from.
+...sql
+SELECT column1, column2, ...
+FROM table_name;
 
 ---
 
