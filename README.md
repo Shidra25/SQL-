@@ -330,14 +330,168 @@ FROM employees
 GROUP BY department
 HAVING AVG(salary) > 60000;
 ```
-
-
 ---
 
 ## WHERE
-
+>The WHERE clause is used to filter rows from a table. It returns only those rows that satisfy a specified condition.
 ...
+### Syntax
+```sql
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+```
 
+### 1: Simple WHERE
+>Retrieve employees from the Engineering department.
+
+```sql
+SELECT *
+FROM employees
+WHERE department = 'Engineering';
+```
+### 2: WHERE with Numeric Value
+```sql
+SELECT name, salary
+FROM employees
+WHERE salary > 70000;
+```
+### 3: WHERE with Less Than
+```sql
+SELECT name, salary
+FROM employees
+WHERE salary < 60000;
+```
+### 4: WHERE with Equal (=)
+```sql
+SELECT *
+FROM employees
+WHERE city = 'New York';
+```
+### 5: WHERE with Not Equal
+```sql
+SELECT *
+FROM employees
+WHERE department <> 'HR';
+```
+or
+```sql
+SELECT *
+FROM employees
+WHERE department != 'HR';
+```
+### 6: WHERE with AND
+```sql
+SELECT name,
+       department,
+       salary
+FROM employees
+WHERE department = 'Engineering'
+AND salary > 80000;
+```
+### 7: WHERE with OR
+```sql
+SELECT *
+FROM employees
+WHERE department = 'HR'
+OR department = 'Finance';
+```
+### 8: WHERE with NOT
+```sql
+SELECT *
+FROM employees
+WHERE NOT department = 'Marketing';
+```
+### 9: WHERE with BETWEEN
+```sql
+SELECT name,
+       salary
+FROM employees
+WHERE salary BETWEEN 60000 AND 90000;
+```
+### 10: WHERE with IN
+```sql
+SELECT name,
+       department
+FROM employees
+WHERE department IN ('Engineering', 'HR', 'Finance');
+```
+### 11: WHERE with NOT IN
+```sql
+SELECT *
+FROM employees
+WHERE department NOT IN ('HR', 'Marketing');
+```
+### 12: WHERE with LIKE
+```sql
+SELECT *
+FROM employees
+WHERE name LIKE 'A%';
+```
+### 13: WHERE with IS NULL
+```sql
+SELECT *
+FROM employees
+WHERE managerid IS NULL;
+```
+### 14: WHERE with IS NOT NULL
+```sql
+SELECT *
+FROM employees
+WHERE managerid IS NOT NULL;
+```
+### 15: WHERE with Dates
+```sql
+SELECT name,
+       hiredate
+FROM employees
+WHERE hiredate > '2022-01-01';
+```
+### 16: WHERE with Multiple Conditions
+```sql
+SELECT *
+FROM employees
+WHERE department='Engineering'
+AND city='New York'
+AND salary > 70000;
+```
+
+### 17: WHERE with Parentheses
+```sql
+SELECT *
+FROM employees
+WHERE (department='Engineering'
+       OR department='HR')
+AND salary > 60000;
+```
+### 18: WHERE with JOIN
+```sql
+SELECT e.name,
+       e.department,
+       d.budget
+FROM employees e
+JOIN "Departments" d
+ON e.department = d.departmentname
+WHERE e.department = 'Engineering';
+```
+### 19: WHERE with Aggregate (Incorrect)
+```sql
+SELECT department,
+       AVG(salary)
+FROM employees
+WHERE AVG(salary) > 70000
+GROUP BY department;
+```
+>Aggregate functions cannot be used in the WHERE clause.
+
+### 20: Use HAVING Instead
+```sql
+SELECT department,
+       AVG(salary) AS AverageSalary
+FROM employees
+GROUP BY department
+HAVING AVG(salary) > 70000;
+```
 ---
 
 ## DISTINCT
