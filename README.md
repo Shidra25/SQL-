@@ -596,23 +596,277 @@ Average:
 (50000 + 50000 + 60000 + 70000) / 4
 = 57,500
 ### 9: DISTINCT with LIMIT
-
-
+```sql
+SELECT DISTINCT city
+FROM employees
+LIMIT 3;
+```
+### 10: DISTINCT with GROUP BY
+```sql
+SELECT DISTINCT department
+FROM employees
+GROUP BY department;
+```
 ---
 
 ## ORDER BY
 
 ...
+The ORDER BY clause is used to sort the result set in ascending (ASC) or descending (DESC) order.
+
+ASC (Ascending) is the default order.
+DESC (Descending) sorts in reverse order.
+### Syntax
+```sql
+SELECT column1, column2
+FROM table_name
+ORDER BY column_name ASC;
+```
+### 1: ORDER BY (Ascending)
+```sql
+SELECT name, salary
+FROM employees
+ORDER BY salary;
+```
+### 2: ORDER BY DESC
+```sql
+SELECT name, salary
+FROM employees
+ORDER BY salary DESC;
+```
+### 3: ORDER BY Text Column
+
+Sort employees alphabetically by name.
+```sql
+SELECT name, department
+FROM employees
+ORDER BY name;
+```
+### 4: ORDER BY Multiple Columns
+
+Sort first by department, then by salary.
+```sql
+SELECT name,
+       department,
+       salary
+FROM employees
+ORDER BY department, salary;
+```
+### 5: Different Sort Orders
+
+Sort department in ascending order and salary in descending order.
+```sql
+SELECT name,
+       department,
+       salary
+FROM employees
+ORDER BY department ASC,
+         salary DESC;
+```
+### 8: ORDER BY with JOIN
+```sql
+SELECT e.name,
+       e.department,
+       d.budget
+FROM employees e
+JOIN "Departments" d
+ON e.department = d.departmentname
+ORDER BY d.budget DESC;
+```
+### 9: ORDER BY Using Column Position
+```sql
+SELECT name,
+       salary,
+       department
+FROM employees
+ORDER BY 2 DESC;
+```
+### 10:ORDER BY with Aggregate Function
+```sql
+SELECT department,
+       AVG(salary) AS AverageSalary
+FROM employees
+GROUP BY department
+ORDER BY AverageSalary DESC;
+```
+### 11: ORDER BY with NULL Values
+```sql
+SELECT name,
+       managerid
+FROM employees
+ORDER BY managerid;
+```
+By default in PostgreSQL:
+
+ASC → NULL values appear last.
+DESC → NULL values appear first.
+
 
 ---
 
 ## TOP / LIMIT
 
 '''
+TOP and LIMIT are used to restrict the number of rows returned by a query.
 
+> LIMIT → Used in PostgreSQL, MySQL, and SQLite.
+> TOP → Used in SQL Server.
+> Since you're using PostgreSQL, you'll use LIMIT.
+
+### Syntax
+#### PostgreSQL
+
+```sql
+SELECT column1, column2
+FROM table_name
+LIMIT number;
+```
+#### SQL Server
+```sql
+SELECT TOP number column1, column2
+FROM table_name;
+```
+### 1: LIMIT
+```sql
+SELECT *
+FROM employees
+LIMIT 5;
+```
+### 2: LIMIT with OFFSET
+Skip the first 5 employees and return the next 5.
+```sql
+SELECT *
+FROM employees
+LIMIT 5
+OFFSET 5;
+```
 ---
 ## Aliases 
+>An Alias is a temporary name given to a column or a table in a SQL query. It makes query results easier to read and SQL statements shorter.
 '''
+### Syntax
+```sql
+SELECT column_name AS alias_name
+FROM table_name;
+```
+### 1: Column Alias
+```sql
+SELECT name,
+       salary AS EmployeeSalary
+FROM employees;
+```
+### 2: Column Alias Without AS
+```sql
+SELECT name,
+       salary EmployeeSalary
+FROM employees;
+```
+### 3: Multiple Column Aliases
+```sql
+SELECT employeesid AS EmployeeID,
+       name AS EmployeeName,
+       salary AS MonthlySalary
+FROM employees;
+```
+### 4: Table Alias
+```sql
+SELECT e.name,
+       e.department,
+       e.salary
+FROM employees AS e;
+```
+### 5: Alias with WHERE
+```sql
+SELECT e.name,
+       e.salary
+FROM employees e
+WHERE e.salary > 70000;
+```
+### 6: Alias with ORDER BY
+```sql
+SELECT name,
+       salary AS EmployeeSalary
+FROM employees
+ORDER BY EmployeeSalary DESC;
+```
+### 7: Alias with Aggregate Function
+```sql
+SELECT department,
+       AVG(salary) AS AverageSalary
+FROM employees
+GROUP BY department;
+```
+### 8: 8: Alias with HAVING
+```sql
+SELECT department,
+       AVG(salary) AS AverageSalary
+FROM employees
+GROUP BY department
+HAVING AVG(salary) > 70000;
+```
+### 9: Alias with JOIN
+```sql
+SELECT e.name,
+       d.departmentname,
+       d.budget
+FROM employees e
+JOIN "Departments" d
+ON e.department = d.departmentname;
+```
+Explanation
+e → Alias for employees
+d → Alias for "Departments"
 
+### 10: Alias with CONCAT
+```sql
+SELECT name || ' - ' || department AS EmployeeDetails
+FROM employees;
+```
+### 11: Alias with COUNT
+```sql
+SELECT department,
+       COUNT(*) AS TotalEmployees
+FROM employees
+GROUP BY department;
+```
+### 12: Alias with CASE
+```sql
+SELECT name,
+       salary,
+       CASE
+           WHEN salary >= 80000 THEN 'High Salary'
+           ELSE 'Normal Salary'
+       END AS SalaryCategory
+FROM employees;
+```
 ---
 ## Comments
+
+> Comments are used to add notes or explanations to SQL code. They are ignored by the SQL engine and are only for humans reading the query.
+
+### Types of Comments
+
+There are two types of comments in SQL:
+> Single-line Comment (--)
+> Multi-line Comment (/* ... */)
+
+### 1: Single-Line Comment
+```sql
+-- Display all employees
+SELECT *
+FROM employees;
+```
+### 2: Comment Above a Query
+```sql
+-- Display employees earning more than ₹70,000
+SELECT name,
+       salary
+FROM employees
+WHERE salary > 70000;
+```
+### 3: Inline Comment
+```sql
+SELECT name,
+       salary -- Monthly salary
+FROM employees;
+```
