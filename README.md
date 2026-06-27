@@ -187,10 +187,22 @@ FROM table_name;
 SELECT *
 FROM Employees;
 ```
-### 2: Select specific columns
+### 2. Select specific columns
 ```sql
 SELECT Name, Salary
 FROM Employees;
+```
+### 3. Using FROM with WHERE
+```sql
+SELECT Name, Department
+FROM Employees
+WHERE Salary > 55000;
+
+```
+### 4. Using Table Alias
+```sql
+SELECT e.Name, e.Salary
+FROM Employees AS e;
 ```
 
 
