@@ -2,7 +2,6 @@
 
 Complete Tutorials for SQL with query examples and notes.
 
-# Contents
 # Table of Contents
 ## Part 1: SQL Basics
 › SELECT, FROM, WHERE
