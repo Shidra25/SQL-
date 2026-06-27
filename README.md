@@ -65,7 +65,7 @@ Comments
 
 Basic Syntax
  >    SELECT column1, column2, ...
-     FROM table_name;
+ >    FROM table_name;
 
 1. Select all columns
   >   SELECT * 
