@@ -741,7 +741,7 @@ LIMIT 5
 OFFSET 5;
 ```
 ---
-## Aliases 
+## ALIASES
 >An Alias is a temporary name given to a column or a table in a SQL query. It makes query results easier to read and SQL statements shorter.
 '''
 ### Syntax
@@ -840,7 +840,7 @@ SELECT name,
 FROM employees;
 ```
 ---
-## Comments
+## COMMENTS
 
 > Comments are used to add notes or explanations to SQL code. They are ignored by the SQL engine and are only for humans reading the query.
 
