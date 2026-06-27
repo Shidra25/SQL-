@@ -529,6 +529,8 @@ HAVING AVG(salary) > 70000;
 ...
 >The DISTINCT clause is used to remove duplicate rows from the result set. It returns only unique values.
 
+
+
 ---
 
 ## ORDER BY
@@ -542,3 +544,8 @@ HAVING AVG(salary) > 70000;
 '''
 
 ---
+## Aliases 
+'''
+
+---
+## Comments
