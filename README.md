@@ -120,7 +120,7 @@
 
 # Part 1: SQL Basics
 
-### SQL Process in Order
+### SQL_Process_in_Order
 ```sql
 > FROM employees
 > WHERE salary > 60000
