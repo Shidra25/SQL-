@@ -194,7 +194,7 @@ FROM table_name;
 > SELECT → Chooses the columns to display.
 > FROM → Specifies the table containing the data.
 
-### 1. Select from
+### 1.FROM with a Single Table
  ```sql
 
 SELECT *
@@ -205,28 +205,38 @@ FROM Employees;
 SELECT Name, Salary
 FROM Employees;
 ```
-### 3. Using FROM with WHERE
+### 3. FROM with WHERE
 ```sql
-SELECT Name, Department
-FROM Employees
-WHERE Salary > 55000;
+SELECT name, department, salary
+FROM employees
+WHERE salary > 60000;
 
 ```
-### 4. Using Table Alias
-```sql
-SELECT e.Name, e.Salary
-FROM Employees AS e;
-```
->Here, e is an alias (short name) for the Employees table.
-
-### 5. Multiple Tables (JOIN)
+### 4.FROM with Table Alias
 ```sql
 SELECT e.name,
-       d.departmentname,
+       e.department,
+       e.salary
+FROM employees AS e;
+```
+or 
+```sql
+SELECT e.name,
+       e.department,
+       e.salary
+FROM employees e;
+```
+
+>Here, e is an alias (short name) for the Employees table.
+
+### 5.FROM with JOIN
+```sql
+SELECT e.name,
+       e.department,
        d.budget
-FROM employees e,
-     "Departments" d
-WHERE e.department = d.departmentname;
+FROM employees e
+JOIN "Departments" d
+ON e.department = d.departmentname;
 ```
 > This works but is not recommended. Always use explicit JOIN syntax.
 
@@ -275,6 +285,53 @@ FROM employees e
 LEFT JOIN employees m
 ON e.managerid = m.employeesid;
 ```
+### 10. FROM with Multiple JOINs
+```sql
+SELECT e.name,
+       d.departmentname,
+       d.budget,
+       m.name AS Manager
+FROM employees e
+JOIN "Departments" d
+ON e.department = d.departmentname
+LEFT JOIN employees m
+ON e.managerid = m.employeesid;
+```
+### 11. FROM with ORDER BY
+```sql
+SELECT name,
+       salary
+FROM employees
+ORDER BY salary DESC;
+```
+### 12. FROM with LIMIT
+```sql
+SELECT *
+FROM employees
+LIMIT 5;
+```
+### 13. FROM with DISTINCT
+```sql
+SELECT DISTINCT department
+FROM employees;
+```
+### 14. FROM with Aggregate Function
+```sql
+SELECT department,
+       COUNT(*) AS TotalEmployees
+FROM employees
+GROUP BY department;
+```
+### 15. FROM with Aggregate and HAVING
+```sql
+SELECT department,
+       AVG(salary) AS AverageSalary
+FROM employees
+GROUP BY department
+HAVING AVG(salary) > 60000;
+```
+
+
 ---
 
 ## WHERE
