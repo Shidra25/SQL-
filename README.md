@@ -2,98 +2,197 @@
 
 Complete Tutorials for SQL with query examples and notes.
 
-# Table of Contents
-## Part 1: SQL Basics
-› SELECT, FROM, WHERE
-› DISTINCT, ORDER BY
-› TOP/LIMIT, Aliases, Comments
-##  Part 2: Filtering & Operators
-› AND, OR, NOT, IN, BETWEEN, LIKE
-› IS NULL, EXISTS, ANY, ALL
-› Arithmetic, Comparison, Bitwise Operators
-## Part 3: Functions
-› String Functions (CONCAT, SUBSTRING, REPLACE…)
-› Date & Time Functions (DATEADD, DATEDIFF…)
-› Numeric Functions (ROUND, FLOOR, SQRT…)
-## Part 4: Aggregate & GROUP BY
-› COUNT, SUM, AVG, MIN, MAX
-› GROUP BY, HAVING
-› ROLLUP, CUBE, GROUPING SETS
-## Part 5: Joins & Subqueries
-› INNER, LEFT, RIGHT, FULL, CROSS, SELF JOIN
-› Scalar, Correlated, Nested Subqueries
-› EXISTS / NOT EXISTS
-## Part 6: Set Operators & CASE
-› UNION, UNION ALL, INTERSECT, EXCEPT
-› Simple, Searched, Nested CASE
-## Part 7: CTE & Window Functions
-› Simple CTE, Multiple CTEs, Recursive CTE
-› ROW_NUMBER, RANK, DENSE_RANK, NTILE
-› LEAD, LAG, FIRST_VALUE, LAST_VALUE
-› Window Frame Clauses (ROWS/RANGE BETWEEN)
-## Part 8: Pivot & Temp Objects
-› PIVOT, UNPIVOT
-› Temporary Tables, Table Variables
-## Part 9: Views, Indexes & Constraints
-› CREATE/ALTER/DROP VIEW
-› Clustered, Non-Clustered, Composite, Unique Index
-› PRIMARY KEY, FOREIGN KEY, UNIQUE, CHECK, DEFAULT
-## Part 10: DDL, DML, TCL, DCL
-› CREATE, ALTER, DROP, TRUNCATE, RENAME
-› INSERT, UPDATE, DELETE, MERGE
-› COMMIT, ROLLBACK, SAVEPOINT, GRANT, REVOKE
-## Part 11: Stored Procedures & Triggers
-› CREATE PROCEDURE, Parameters, OUTPUT, EXEC
-› Scalar & Table-Valued Functions
-› AFTER / INSTEAD OF Triggers
-## Part 12: Transactions & Performance
-› BEGIN TRANSACTION, TRY...CATCH
-› Dynamic SQL (EXEC, sp_executesql)
-› Execution Plans, Index & Query Optimization
-## Part 13: Advanced SQL
-› Recursive Queries, Hierarchical Data
-› Gaps & Islands, Duplicate Removal
-› Running Totals, Rolling Average, Median, Percentile
-› XML / JSON Functions, Temporal Tables
+# 📚 SQL Learning Roadmap
 
-# PART 1
-SELECT · FROM · WHERE · DISTINCT · ORDER BY · TOP/LIMIT · Aliases ·
-Comments
+## 📑 Table of Contents
 
-## Select
-> The SELECT statement retrieves data from one or more database tables
+### Part 1: SQL Basics
+- [SELECT](#select)
+- [FROM](#from)
+- [WHERE](#where)
+- [DISTINCT](#distinct)
+- [ORDER BY](#order-by)
+- [TOP / LIMIT](#top--limit)
+- [Aliases](#aliases)
+- [Comments](#comments)
 
-Basic Syntax
-  ```sql
-     SELECT column1, column2, ...
-     FROM table_name;
-  ```
+### Part 2: Filtering & Operators
+- [AND](#and)
+- [OR](#or)
+- [NOT](#not)
+- [IN](#in)
+- [BETWEEN](#between)
+- [LIKE](#like)
+- [IS NULL](#is-null)
+- [EXISTS](#exists)
+- [ANY](#any)
+- [ALL](#all)
+- [Arithmetic Operators](#arithmetic-operators)
+- [Comparison Operators](#comparison-operators)
+- [Bitwise Operators](#bitwise-operators)
 
-1. Select all columns
+### Part 3: Functions
+- [String Functions](#string-functions)
+- [Date & Time Functions](#date--time-functions)
+- [Numeric Functions](#numeric-functions)
+
+### Part 4: Aggregate & GROUP BY
+- [COUNT](#count)
+- [SUM](#sum)
+- [AVG](#avg)
+- [MIN](#min)
+- [MAX](#max)
+- [GROUP BY](#group-by)
+- [HAVING](#having)
+- [ROLLUP](#rollup)
+- [CUBE](#cube)
+- [GROUPING SETS](#grouping-sets)
+
+### Part 5: Joins & Subqueries
+- [INNER JOIN](#inner-join)
+- [LEFT JOIN](#left-join)
+- [RIGHT JOIN](#right-join)
+- [FULL JOIN](#full-join)
+- [CROSS JOIN](#cross-join)
+- [SELF JOIN](#self-join)
+- [Scalar Subquery](#scalar-subquery)
+- [Correlated Subquery](#correlated-subquery)
+- [Nested Subquery](#nested-subquery)
+- [EXISTS / NOT EXISTS](#exists--not-exists)
+
+### Part 6: Set Operators & CASE
+- [UNION](#union)
+- [UNION ALL](#union-all)
+- [INTERSECT](#intersect)
+- [EXCEPT](#except)
+- [CASE](#case)
+
+### Part 7: CTE & Window Functions
+- [CTE](#cte)
+- [Recursive CTE](#recursive-cte)
+- [ROW_NUMBER](#row_number)
+- [RANK](#rank)
+- [DENSE_RANK](#dense_rank)
+- [NTILE](#ntile)
+- [LEAD](#lead)
+- [LAG](#lag)
+- [FIRST_VALUE](#first_value)
+- [LAST_VALUE](#last_value)
+- [Window Frame Clauses](#window-frame-clauses)
+
+### Part 8: Pivot & Temp Objects
+- [PIVOT](#pivot)
+- [UNPIVOT](#unpivot)
+- [Temporary Tables](#temporary-tables)
+- [Table Variables](#table-variables)
+
+### Part 9: Views, Indexes & Constraints
+- [Views](#views)
+- [Indexes](#indexes)
+- [Constraints](#constraints)
+
+### Part 10: DDL, DML, TCL & DCL
+- [DDL](#ddl)
+- [DML](#dml)
+- [TCL](#tcl)
+- [DCL](#dcl)
+
+### Part 11: Stored Procedures & Triggers
+- [Stored Procedures](#stored-procedures)
+- [Functions](#functions)
+- [Triggers](#triggers)
+
+### Part 12: Transactions & Performance
+- [Transactions](#transactions)
+- [Dynamic SQL](#dynamic-sql)
+- [Execution Plans](#execution-plans)
+- [Query Optimization](#query-optimization)
+
+### Part 13: Advanced SQL
+- [Recursive Queries](#recursive-queries)
+- [Hierarchical Data](#hierarchical-data)
+- [Gaps & Islands](#gaps--islands)
+- [Running Totals](#running-totals)
+- [Rolling Average](#rolling-average)
+- [Median](#median)
+- [Percentile](#percentile)
+- [XML / JSON Functions](#xml--json-functions)
+- [Temporal Tables](#temporal-tables)
+
+---
+
+# Part 1: SQL Basics
+
+## SELECT
+
+> The `SELECT` statement retrieves data from one or more database tables.
+
+### Syntax
+
 ```sql
-    SELECT * 
-     FROM employees
+SELECT column1, column2, ...
+FROM table_name;
 ```
-2. Select all columns
+
+### 1. Select all columns
+
 ```sql
-     SELECT name, salary
-     FROM employees
+SELECT *
+FROM employees;
 ```
-3. Select with a condition
-    
+
+### 2. Select specific columns
+
+```sql
+SELECT name, salary
+FROM employees;
+```
+
+### 3. Select with a condition
+
 ```sql
 SELECT name, salary
 FROM employees
 WHERE salary > 70000;
 ```
-4. Select distinct values
+
+### 4. Select distinct values
+
 ```sql
-      SELECT DISTINCT department
-      FROM employees;
-  ``` 
-6. Select with sorting
-```sql
-      SELECT name, salary
-      FROM employees
-      WHERE salary > 70000;
+SELECT DISTINCT department
+FROM employees;
 ```
+
+### 5. Select with sorting
+
+```sql
+SELECT name, salary
+FROM employees
+ORDER BY salary DESC;
+```
+
+---
+
+## FROM
+
+...
+
+---
+
+## WHERE
+
+...
+
+---
+
+## DISTINCT
+
+...
+
+---
+
+## ORDER BY
+
+...
+
+
