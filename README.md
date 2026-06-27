@@ -796,7 +796,7 @@ SELECT department,
 FROM employees
 GROUP BY department;
 ```
-### 8: 8: Alias with HAVING
+### 8: Alias with HAVING
 ```sql
 SELECT department,
        AVG(salary) AS AverageSalary
