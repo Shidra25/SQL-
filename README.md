@@ -59,3 +59,32 @@ Complete Tutorials for SQL with query examples and notes.
 # PART 1
 SELECT · FROM · WHERE · DISTINCT · ORDER BY · TOP/LIMIT · Aliases ·
 Comments
+
+## Select
+> The SELECT statement retrieves data from one or more database tables
+
+Basic Syntax
+     SELECT column1, column2, ...
+     FROM table_name;
+
+1. Select all columns
+     SELECT * 
+     FROM employees
+
+2. Select all columns
+     SELECT name, salary
+     FROM employees
+
+3. Select with a condition
+      SELECT name, salary
+      FROM employees
+      WHERE salary > 70000;
+   
+4. Select distinct values
+      SELECT DISTINCT department
+      FROM employees;
+   
+5. Select with sorting
+      SELECT name, salary
+      FROM employees
+      WHERE salary > 70000;
