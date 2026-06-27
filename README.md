@@ -529,6 +529,73 @@ HAVING AVG(salary) > 70000;
 ...
 >The DISTINCT clause is used to remove duplicate rows from the result set. It returns only unique values.
 
+### Syntax
+```sql
+SELECT DISTINCT column_name
+FROM table_name;
+```
+>or 
+```sql
+SELECT DISTINCT column1, column2
+FROM table_name;
+```
+### 1: DISTINCT on One Column
+
+```sql
+SELECT DISTINCT department
+FROM employees;
+```
+### 2: Without DISTINCT
+```sql
+SELECT department
+FROM employees;
+```
+### 3: DISTINCT on Multiple Columns
+```sql
+SELECT DISTINCT department, city
+FROM employees;
+```
+### 4: DISTINCT with ORDER BY
+```sql
+SELECT DISTINCT department
+FROM employees
+ORDER BY department;
+```
+### 5: DISTINCT with WHERE
+```sql
+SELECT DISTINCT city
+FROM employees
+WHERE department = 'Engineering';
+```
+### 6: DISTINCT with JOIN
+```sql
+SELECT DISTINCT
+       d.departmentname,
+       d.budget
+FROM employees e
+JOIN "Departments" d
+ON e.department = d.departmentname;
+```
+### 7: DISTINCT with COUNT
+```sql
+SELECT COUNT(DISTINCT department)
+FROM employees;
+```
+### 8: DISTINCT with Aggregate
+```sql
+SELECT AVG(DISTINCT salary)
+FROM employees;
+```
+Without DISTINCT
+
+SELECT AVG(salary)
+FROM employees;
+
+Average:
+
+(50000 + 50000 + 60000 + 70000) / 4
+= 57,500
+### 9: DISTINCT with LIMIT
 
 
 ---
