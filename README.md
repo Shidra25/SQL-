@@ -870,3 +870,26 @@ SELECT name,
        salary -- Monthly salary
 FROM employees;
 ```
+ ## Part 2: Filtering & Operators
+ ---
+### AND
+>The AND operator is used to combine two or more conditions in the WHERE clause.
+
+A row is returned only if all conditions are TRUE.
+
+Syntax
+```sql
+SELECT column1, column2
+FROM table_name
+WHERE condition1
+AND condition2;
+```
+```sql
+SELECT name,
+       department,
+       salary
+FROM employees
+WHERE department = 'Engineering'
+AND salary > 70000;
+```
+ 
