@@ -874,8 +874,7 @@ FROM employees;
  ---
 ### AND
 >The AND operator is used to combine two or more conditions in the WHERE clause.
-
-A row is returned only if all conditions are TRUE.
+>A row is returned only if all conditions are TRUE.
 
 Syntax
 ```sql
@@ -884,6 +883,7 @@ FROM table_name
 WHERE condition1
 AND condition2;
 ```
+### And WIth Conditions
 ```sql
 SELECT name,
        department,
@@ -892,4 +892,189 @@ FROM employees
 WHERE department = 'Engineering'
 AND salary > 70000;
 ```
- 
+### AND with BETWEEN
+```sql
+SELECT name,
+       department,
+       salary
+FROM employees
+WHERE department = 'HR'
+AND salary BETWEEN 50000 AND 80000;
+```
+## OR
+>The OR operator is used to combine two or more conditions in the WHERE clause.
+>A row is returned if at least one condition is TRUE.
+
+### Syntax:
+```sql
+SELECT column1, column2
+FROM table_name
+WHERE condition1
+OR condition2;
+```
+### OR with Two Conditions
+```sql
+SELECT name,
+       department
+FROM employees
+WHERE department = 'Engineering'
+OR department = 'HR';
+```
+## NOT
+>The NOT operator is used to reverse (negate) a condition.
+>If a condition is TRUE, NOT makes it FALSE.
+>If a condition is FALSE, NOT makes it TRUE.
+
+It is commonly used with WHERE to exclude rows that match a condition.
+
+### Syntax:
+```sql
+SELECT column1, column2
+FROM table_name
+WHERE NOT condition;
+```
+### NOT with Equal (=)
+```sql
+SELECT name,
+       department
+FROM employees
+WHERE NOT department = 'HR';
+```
+### NOT with BETWEEN
+```sql
+SELECT name,
+       salary
+FROM employees
+WHERE salary NOT BETWEEN 50000 AND 80000;
+```
+### NOT with IN
+```sql
+SELECT name,
+       department
+FROM employees
+WHERE department NOT IN ('Engineering', 'HR');
+```
+
+Equivalent to:
+```sql
+SELECT name,
+       department
+FROM employees
+WHERE department <> 'Engineering'
+AND department <> 'HR';
+```
+## IN
+>The IN operator is used to check whether a value matches any value in a list.
+>Instead of writing multiple OR conditions, you can use IN.
+
+### Syntax
+```sql
+SELECT column1, column2
+FROM table_name
+WHERE column_name IN (value1, value2, value3, ...);
+```
+### Example 1:
+```
+SELECT name,
+       department
+FROM employees
+WHERE department IN ('Engineering', 'HR', 'Finance');
+```
+### Example 2:
+```sql
+SELECT name,
+       department
+FROM employees
+WHERE department = 'Engineering'
+   OR department = 'HR'
+   OR department = 'Finance';
+```
+### Example 3:
+```sql
+SELECT e.name,
+       e.department,
+       d.budget
+FROM employees e
+JOIN "Departments" d
+ON e.department = d.departmentname
+WHERE d.budget IN (200000, 500000);
+```
+## BETWEEN
+>The BETWEEN operator is used to filter values within a specified range.
+>It includes both the starting and ending values.
+
+### Syntax
+```sql
+SELECT column1, column2
+FROM table_name
+WHERE column_name BETWEEN value1 AND value2;
+```
+Example 1:
+```sql
+SELECT name,
+       salary
+FROM employees
+WHERE salary BETWEEN 50000 AND 80000;
+```
+
+Example 2:
+```sql
+SELECT name,
+       hiredate
+FROM employees
+WHERE hiredate BETWEEN '2023-01-01' AND '2023-12-31';
+```
+```sql
+SELECT name,
+       salary
+FROM employees
+WHERE salary NOT BETWEEN 50000 AND 80000;
+```
+
+## IS NULL /IS NOT NULL
+>In SQL, NULL represents a missing, unknown, or undefined value.
+
+>Important: NULL is not the same as:
+
+> "0 (zero)"
+> '' (empty string)
+>  "FALSE"
+
+To check for NULL values, use:
+
+IS NULL
+IS NOT NULL
+
+Note: You cannot use = or != with NULL.
+
+## Syntax:
+
+### IS NULL
+```sql
+SELECT column1, column2
+FROM table_name
+WHERE column_name IS NULL;
+```
+### IS NOT NULL
+```sql
+SELECT column1, column2
+FROM table_name
+WHERE column_name IS NOT NULL;
+```
+
+Example 1:
+```sql
+SELECT name,
+       managerid
+FROM employees
+WHERE managerid IS NULL;
+```
+Example 2:
+```sql
+SELECT name,
+       managerid
+FROM employees
+WHERE managerid IS NOT NULL;
+```
+## EXISTS
+
