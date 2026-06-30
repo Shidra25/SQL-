@@ -1078,3 +1078,41 @@ WHERE managerid IS NOT NULL;
 ```
 ## EXISTS
 
+>The EXISTS operator is used to check whether a subquery returns any rows.
+If the subquery returns one or more rows, EXISTS returns TRUE.
+If the subquery returns no rows, EXISTS returns FALSE.
+
+Note: EXISTS is always used with a subquery.
+
+### Syntax:
+```sql
+SELECT column1, column2
+FROM table_name
+WHERE EXISTS (
+    subquery
+);
+```
+### Example 1: Basic EXISTS
+```sql
+SELECT departmentname
+FROM "Departments" d
+WHERE EXISTS (
+    SELECT 1
+    FROM employees e
+    WHERE e.department = d.departmentname
+);
+```
+>For each department:If at least one employee belongs to that department → Return the department.
+>Otherwise → Skip it.
+
+### Example 2: EXISTS with Salary
+```sql
+SELECT departmentname
+FROM "Departments" d
+WHERE EXISTS (
+    SELECT 1
+    FROM employees e
+    WHERE e.department = d.departmentname
+      AND e.salary > 80000
+);
+```
