@@ -1082,6 +1082,13 @@ WHERE managerid IS NOT NULL;
 If the subquery returns one or more rows, EXISTS returns TRUE.
 If the subquery returns no rows, EXISTS returns FALSE.
 
+## Key Points
+EXISTS is used only with subqueries.
+It returns TRUE if the subquery returns one or more rows.
+NOT EXISTS returns rows where the subquery returns no rows.
+SELECT 1 and SELECT * behave the same inside an EXISTS subquery, but SELECT 1 is the preferred convention.
+EXISTS is often more efficient than IN for large correlated subqueries because it stops searching as soon as it finds the first matching row.
+
 Note: EXISTS is always used with a subquery.
 
 ### Syntax:
@@ -1116,3 +1123,183 @@ WHERE EXISTS (
       AND e.salary > 80000
 );
 ```
+```sql
+SELECT departmentname
+FROM "Departments" d
+WHERE EXISTS (
+    SELECT 1
+    FROM employees e
+    WHERE e.department = d.departmentname
+)
+ORDER BY departmentname;
+```
+
+## LIKE & Wildcards
+
+The LIKE operator is used to search for a pattern in text (string) values.
+
+It is commonly used with the WHERE clause to filter rows based on partial matches.
+
+### Syntax:
+```sql
+SELECT column1, column2
+FROM table_name
+WHERE column_name LIKE 'pattern';
+```
+### Example 1: Starts With
+```sql
+SELECT name
+FROM employees
+WHERE name LIKE 'A%';
+```
+### Example 2: Ends With
+
+```sql
+SELECT name
+FROM employees
+WHERE name LIKE '%e';
+```
+Example 3: Contains
+```sql
+SELECT name
+FROM employees
+WHERE name LIKE '%ar%';
+```
+### One Character After A:
+```sql
+SELECT name
+FROM employees
+WHERE name LIKE 'A_';
+```
+Because _ matches exactly one character.
+
+### Exactly Five Letters
+```sql
+SELECT name
+FROM employees
+WHERE name LIKE '_____';
+```
+
+### LIKE Wildcard Summary
+Pattern	Meaning	Example Match
+'A%'	Starts with A	Alice, Andrew
+'%e'	Ends with e	Alice, Charlie
+'%ar%'	Contains "ar"	Charlie
+'A_'	A + exactly one character	Al
+'_____'	Exactly 5 characters	Alice, David
+'__r%'	Third letter is r	Charlie
+
+### Key Points
+LIKE is used for pattern matching in text columns.
+% matches zero or more characters.
+_ matches exactly one character.
+Use NOT LIKE to exclude matching patterns.
+LIKE is commonly used with WHERE, AND, OR, ORDER BY, and JOIN.
+Use = for exact matches and LIKE for pattern-based matches.
+
+
+## ANY
+
+The ANY operator is used to compare a value with any one of the values returned by a subquery.
+
+A condition is TRUE if it matches at least one value returned by the subquery.
+
+Note: ANY is always used with a comparison operator (=, >, <, >=, <=, <>) and a subquery.
+
+### Key Points
+ANY is always used with a subquery.
+It works with comparison operators such as =, >, <, >=, <=, and <>.
+The condition is TRUE if at least one comparison succeeds.
+= ANY (subquery) is equivalent to IN (subquery).
+ANY is commonly used when comparing a value against a dynamic set of values returned by another query.
+
+### Syntax:
+```sql
+SELECT column1, column2
+FROM table_name
+WHERE column_name comparison_operator ANY (
+    subquery
+);
+```
+### = ANY
+
+```sql
+SELECT name,
+       department
+FROM employees
+WHERE department = ANY (
+    SELECT departmentname
+    FROM "Departments"
+);
+```
+This is similar to:
+```sql
+SELECT name,
+       department
+FROM employees
+WHERE department IN (
+    SELECT departmentname
+    FROM "Departments"
+);
+```
+
+ANY: The condition must be true for at least one value returned by the subquery.
+ALL: The condition must be true for every value returned by the subquery.
+
+## Operators
+
+### Arithmetic
+
+### Key Points
+Arithmetic operators perform mathematical calculations on numeric data.
+They can be used in SELECT, WHERE, ORDER BY, HAVING, and aggregate functions.
+Parentheses () control the order of evaluation.
+Arithmetic operations involving NULL return NULL; use COALESCE() when appropriate.
+Integer division returns an integer result. Use decimal values or CAST() to get fractional results.
+
+| Operator | Description         | Example         |
+| -------- | ------------------- | --------------- |
+| `+`      | Addition            | `salary + 5000` |
+| `-`      | Subtraction         | `salary - 5000` |
+| `*`      | Multiplication      | `salary * 12`   |
+| `/`      | Division            | `salary / 2`    |
+| `%`      | Modulus (Remainder) | `salary % 1000` |
+
+### 1. Addition (+)
+```sql
+SELECT name,
+       salary,
+       salary + 5000 AS NewSalary
+FROM employees;
+```
+### 2. Subtraction (-)
+
+```sql
+SELECT name,
+       salary,
+       salary - 2000 AS ReducedSalary
+FROM employees;
+```
+### 3. Multiplication (*)
+```sql
+SELECT name,
+       salary,
+       salary * 12 AS AnnualSalary
+FROM employees;
+```
+### 4. Division (/)
+```sql
+SELECT name,
+       salary,
+       salary / 2 AS HalfSalary
+FROM employees;
+```
+### 5. Modulus (%)
+```sql
+SELECT name,
+       salary,
+       salary % 1000 AS Remainder
+FROM employees;
+```
+
+
