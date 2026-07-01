@@ -1248,7 +1248,7 @@ ALL: The condition must be true for every value returned by the subquery.
 
 ## Operators
 
-### Arithmetic
+### Arithmetic-Operators
 
 ### Key Points
 >Arithmetic operators perform mathematical calculations on numeric data.
@@ -1301,7 +1301,7 @@ SELECT name,
        salary % 1000 AS Remainder
 FROM employees;
 ```
-## Comparison
+## Comparison-Operators
 
 >Comparison operators are used to compare two values.
 
