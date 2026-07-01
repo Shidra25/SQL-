@@ -586,11 +586,11 @@ FROM employees;
 SELECT AVG(DISTINCT salary)
 FROM employees;
 ```
-Without DISTINCT
-
+### Without DISTINCT
+```sql
 SELECT AVG(salary)
 FROM employees;
-
+```
 Average:
 
 (50000 + 50000 + 60000 + 70000) / 4
@@ -870,7 +870,7 @@ SELECT name,
        salary -- Monthly salary
 FROM employees;
 ```
- ## Part 2: Filtering & Operators
+# Part 2: Filtering & Operators
  ---
 ### AND
 >The AND operator is used to combine two or more conditions in the WHERE clause.
@@ -1367,5 +1367,549 @@ SELECT name,
 FROM employees
 WHERE salary <= 60000;
 ```
+# Part 3: Functions
+>String functions are built-in SQL functions used to manipulate, format, search, and analyze text values.
+
+| Function       | Description                          | Example                           |
+| -------------- | ------------------------------------ | --------------------------------- |
+| `UPPER()`      | Convert to uppercase                 | `UPPER(name)`                     |
+| `LOWER()`      | Convert to lowercase                 | `LOWER(name)`                     |
+| `INITCAP()`    | Capitalize first letter of each word | `INITCAP(name)`                   |
+| `LENGTH()`     | Returns string length                | `LENGTH(name)`                    |
+| `CONCAT()`     | Concatenates strings                 | `CONCAT(name, ' - ', department)` |
+| `\|\|`         | String concatenation operator        | `name \|\| ' - ' \|\| department` |
+| `TRIM()`       | Removes leading and trailing spaces  | `TRIM(name)`                      |
+| `LTRIM()`      | Removes left spaces                  | `LTRIM(name)`                     |
+| `RTRIM()`      | Removes right spaces                 | `RTRIM(name)`                     |
+| `SUBSTRING()`  | Extracts part of a string            | `SUBSTRING(name,1,3)`             |
+| `LEFT()`       | Leftmost characters                  | `LEFT(name,3)`                    |
+| `RIGHT()`      | Rightmost characters                 | `RIGHT(name,2)`                   |
+| `POSITION()`   | Finds character position             | `POSITION('a' IN name)`           |
+| `REPLACE()`    | Replaces text                        | `REPLACE(city,'York','Delhi')`    |
+| `REVERSE()`    | Reverses string                      | `REVERSE(name)`                   |
+| `LPAD()`       | Left padding                         | `LPAD(name,10,'*')`               |
+| `RPAD()`       | Right padding                        | `RPAD(name,10,'*')`               |
+| `SPLIT_PART()` | Splits text by delimiter             | `SPLIT_PART(email,'@',1)`         |
+| `ASCII()`      | ASCII value of first character       | `ASCII(name)`                     |
+| `CHR()`        | Character from ASCII code            | `CHR(65)`                         |
 
 
+### 1. UPPER()
+Converts text to uppercase.
+```sql
+SELECT name,
+       UPPER(name) AS UpperName
+FROM employees;
+```
+### 2. LOWER()
+Converts text to lowercase.
+```sql
+SELECT name,
+       LOWER(name) AS LowerName
+FROM employees;
+```
+### 3. INITCAP()
+Capitalizes the first letter of each word.
+```sql
+SELECT INITCAP('john smith');
+```
+
+### 4. LENGTH()
+Returns the number of characters.
+```sql
+SELECT name,
+       LENGTH(name) AS Characters
+FROM employees;
+```
+
+### 5. CONCAT()
+Combines multiple strings.
+```sql
+SELECT CONCAT(name,' - ',department) AS EmployeeInfo
+FROM employees;
+```
+### 6. Concatenation Operator (||)
+```sql
+SELECT name || ' works in ' || department AS EmployeeInfo
+FROM employees;
+```
+### 7. TRIM()
+Removes spaces from both ends.
+```sql
+Removes spaces from both ends.
+```
+### 8. LTRIM()
+
+Removes left spaces.
+```sql
+SELECT LTRIM('   Alice');
+```
+### 9. RTRIM()
+
+Removes right spaces.
+```sql
+SELECT RTRIM('Alice   ');
+```
+### 10. SUBSTRING()
+
+Extracts part of a string
+```sql
+SELECT name,
+       SUBSTRING(name,1,3) AS FirstThreeLetters
+FROM employees;
+```
+### 11. LEFT()
+
+Returns leftmost characters.
+```sql
+SELECT LEFT(name,2)
+FROM employees;
+```
+### 12. RIGHT()
+
+Returns rightmost characters.
+```sql
+SELECT RIGHT(name,2)
+FROM employees;
+```
+### 13. POSITION()
+
+Finds the position of a substring.
+```sql
+SELECT POSITION('a' IN name)
+FROM employees;
+```
+### 14. REPLACE()
+
+Replace one string with another.
+
+```sql
+SELECT REPLACE(city,'New','Old')
+FROM employees;
+```
+### 15. REVERSE()
+```sql
+SELECT REVERSE(name)
+FROM employees;
+```
+### 16. LPAD()
+
+Pads characters on the left.
+```sql
+SELECT LPAD(name,10,'*')
+FROM employees;
+```
+### 17. RPAD()
+
+Pads characters on the right.
+```sql
+SELECT RPAD(name,10,'*')
+FROM employees;
+```
+### 18. SPLIT_PART()
+
+Extracts a part of a delimited string.
+```sql
+SELECT SPLIT_PART('alice@gmail.com','@',1);
+```
+### 19. ASCII()
+
+Returns the ASCII code of the first character.
+```sql
+SELECT ASCII('A');
+```
+### 20. CHR()
+
+Returns a character from an ASCII code.
+```sql
+SELECT CHR(65);
+```
+
+# Date & Time Functions
+>Date & Time Functions are built-in SQL functions used to retrieve, manipulate, format, calculate, and compare DATE, TIME, TIMESTAMP, and INTERVAL values.
+
+| Function            | Description                             | Example                                                       |
+| ------------------- | --------------------------------------- | ------------------------------------------------------------- |
+| `CURRENT_DATE`      | Returns the current date                | `CURRENT_DATE`                                                |
+| `CURRENT_TIME`      | Returns the current time                | `CURRENT_TIME`                                                |
+| `CURRENT_TIMESTAMP` | Returns the current date and time       | `CURRENT_TIMESTAMP`                                           |
+| `NOW()`             | Returns the current timestamp           | `NOW()`                                                       |
+| `LOCALTIME`         | Returns the local time                  | `LOCALTIME`                                                   |
+| `LOCALTIMESTAMP`    | Returns the local timestamp             | `LOCALTIMESTAMP`                                              |
+| `AGE()`             | Calculates the difference between dates | `AGE(CURRENT_DATE, hiredate)`                                 |
+| `EXTRACT()`         | Extracts a part of a date or time       | `EXTRACT(YEAR FROM hiredate)`                                 |
+| `DATE_PART()`       | Returns a specific part of a date       | `DATE_PART('year', hiredate)`                                 |
+| `DATE_TRUNC()`      | Truncates a date/time                   | `DATE_TRUNC('month', CURRENT_TIMESTAMP)`                      |
+| `TO_CHAR()`         | Formats a date/time as text             | `TO_CHAR(hiredate,'DD-MM-YYYY')`                              |
+| `TO_DATE()`         | Converts text to a date                 | `TO_DATE('25-12-2025','DD-MM-YYYY')`                          |
+| `TO_TIMESTAMP()`    | Converts text to a timestamp            | `TO_TIMESTAMP('2025-12-25 10:30:00','YYYY-MM-DD HH24:MI:SS')` |
+| `INTERVAL`          | Represents a duration of time           | `CURRENT_DATE + INTERVAL '10 days'`                           |
+| `AT TIME ZONE`      | Converts timestamps between time zones  | `CURRENT_TIMESTAMP AT TIME ZONE 'UTC'`                        |
+
+
+### CURRENT_DATE
+>CURRENT_DATE is a built-in PostgreSQL function that returns today's current date according to the database server.
+
+>It returns only the date.
+>It does not include the time.
+>It does not require parentheses.
+
+```sql
+SELECT CURRENT_DATE;
+```
+
+### 2. CURRENT_TIME
+
+Returns the current time.
+```sql
+SELECT CURRENT_TIME;
+```
+### 3. CURRENT_TIMESTAMP
+
+Returns the current date and time.
+```sql
+SELECT CURRENT_TIMESTAMP;
+```
+### 4. NOW()
+
+Returns the current timestamp with the session time zone.
+```sql
+SELECT NOW();
+```
+### 5. LOCALTIME
+
+Returns the current local time (without time zone).
+```sql
+SELECT LOCALTIME;
+```
+### 6. LOCALTIMESTAMP
+
+Returns the current local date and time (without time zone).
+```sql
+SELECT LOCALTIMESTAMP;
+```
+### 7. AGE()
+
+Calculates the difference between two dates.
+```sql
+SELECT name,
+       AGE(CURRENT_DATE, hiredate) AS experience
+FROM employees;
+```
+### 8. EXTRACT()
+
+>Extracts a specific part of a date or timestamp.
+#### Extract the hire year.
+```sql
+SELECT name,
+       EXTRACT(YEAR FROM hiredate) AS hire_year
+FROM employees;
+```
+#### Extract the current month.
+```sql
+SELECT EXTRACT(MONTH FROM CURRENT_DATE);
+```
+#### Extract the current day.
+```sql
+Extract the current day.
+```
+#### Extract the current hour.
+```sql
+SELECT EXTRACT(HOUR FROM CURRENT_TIMESTAMP);
+```
+### 9. DATE_PART()
+>Returns a specific part of a date or timestamp.
+#### Extract the hire year.
+```sql
+SELECT name,
+       DATE_PART('year', hiredate) AS hire_year
+FROM employees;
+```
+#### Extract the current month.
+```sql
+SELECT DATE_PART('month', CURRENT_DATE);
+```
+
+### 10. DATE_TRUNC()
+>Truncates a date or timestamp to a specified precision.
+Beginning of the current month.
+```sql
+SELECT DATE_TRUNC('month', CURRENT_TIMESTAMP);
+```
+Beginning of the current year.
+```sql
+SELECT DATE_TRUNC('year', CURRENT_TIMESTAMP);
+```
+Beginning of the current day.
+```sql
+SELECT DATE_TRUNC('day', CURRENT_TIMESTAMP);
+```
+### 11. TO_CHAR()
+
+>Formats a date or timestamp as text.
+```sql
+SELECT TO_CHAR(CURRENT_DATE, 'DD-MM-YYYY');
+```
+Format employee hire dates.
+```sql
+SELECT name,
+       TO_CHAR(hiredate, 'DD Mon YYYY')
+FROM employees;
+```
+Format timestamp.
+```sql
+SELECT TO_CHAR(CURRENT_TIMESTAMP,
+               'DD-MM-YYYY HH24:MI:SS');
+```
+### 12. TO_DATE()
+
+>Converts a string into a DATE value.
+
+```sql
+SELECT TO_DATE('25-12-2025', 'DD-MM-YYYY');
+```
+
+```sql
+SELECT TO_DATE('2025/12/25',
+               'YYYY/MM/DD');
+```
+### 13. TO_TIMESTAMP()
+
+Converts a string into a TIMESTAMP.
+
+```sql
+SELECT TO_TIMESTAMP(
+'2025-12-25 10:30:00',
+'YYYY-MM-DD HH24:MI:SS'
+);
+```
+### 14. INTERVAL
+
+>Represents a duration of time.
+
+Add 10 days.
+```sql
+SELECT CURRENT_DATE + INTERVAL '10 days';
+```
+Subtract 2 months.
+```sql
+SELECT CURRENT_DATE - INTERVAL '2 months';
+```
+Employee's first work anniversary.
+```sql
+SELECT name,
+       hiredate + INTERVAL '1 year'
+FROM employees;
+```
+### 15. AT TIME ZONE
+
+>Converts timestamps between time zones.
+
+>Convert the current timestamp to UTC.
+```sql
+SELECT CURRENT_TIMESTAMP
+AT TIME ZONE 'UTC';
+```
+Convert the current timestamp to India Standard Time.
+```sql
+SELECT CURRENT_TIMESTAMP
+AT TIME ZONE 'Asia/Kolkata';
+```
+## Numeric Functions
+>Numeric functions are built-in SQL functions used to perform mathematical calculations, rounding, absolute values, powers, square roots, random number generation, >logarithms, and other numeric operations.
+
+| Function               | Description                                       | Example                    |
+| ---------------------- | ------------------------------------------------- | -------------------------- |
+| `ABS()`                | Returns the absolute (positive) value             | `ABS(-25)`                 |
+| `CEIL()` / `CEILING()` | Rounds up to the nearest integer                  | `CEIL(12.3)`               |
+| `FLOOR()`              | Rounds down to the nearest integer                | `FLOOR(12.9)`              |
+| `ROUND()`              | Rounds a number                                   | `ROUND(12.567,2)`          |
+| `TRUNC()`              | Removes decimal places without rounding           | `TRUNC(12.987,2)`          |
+| `MOD()`                | Returns the remainder                             | `MOD(10,3)`                |
+| `POWER()`              | Raises a number to a power                        | `POWER(2,5)`               |
+| `SQRT()`               | Returns the square root                           | `SQRT(64)`                 |
+| `CBRT()`               | Returns the cube root                             | `CBRT(27)`                 |
+| `RANDOM()`             | Returns a random number between 0 and 1           | `RANDOM()`                 |
+| `SIGN()`               | Returns the sign of a number                      | `SIGN(-15)`                |
+| `PI()`                 | Returns the value of π                            | `PI()`                     |
+| `EXP()`                | Returns e raised to a power                       | `EXP(2)`                   |
+| `LN()`                 | Returns the natural logarithm                     | `LN(10)`                   |
+| `LOG()`                | Returns the logarithm (base 10 or specified base) | `LOG(100)`                 |
+| `LOG(base, value)`     | Returns logarithm with a specified base           | `LOG(2,8)`                 |
+| `GREATEST()`           | Returns the largest value                         | `GREATEST(10,20,30)`       |
+| `LEAST()`              | Returns the smallest value                        | `LEAST(10,20,30)`          |
+| `WIDTH_BUCKET()`       | Places a value into a histogram bucket            | `WIDTH_BUCKET(65,0,100,5)` |
+
+### 1. ABS()
+
+Returns the absolute (positive) value of a number.
+```sql
+SELECT ABS(-250);
+```
+### 2. CEIL() / CEILING()
+
+Rounds a number up to the nearest integer.
+```sql
+SELECT CEIL(25.2);
+```
+3. FLOOR()
+
+Rounds a number down to the nearest integer.
+```sql
+SELECT FLOOR(25.9);
+```
+### 4. ROUND()
+
+Rounds a number to the specified decimal places.
+```sql
+SELECT ROUND(25.6789);
+```
+Round to 2 decimal places.
+```sql
+SELECT ROUND(25.6789,2);
+```
+Round employee salary after dividing by 12.
+```sql
+SELECT name,
+       ROUND(salary/12.0,2) AS monthly_salary
+FROM employees;
+```
+### 5. TRUNC()
+
+Removes decimal places without rounding.
+```sql
+SELECT TRUNC(25.9876);
+```
+Keep two decimal places.
+```sql
+SELECT TRUNC(25.9876,2);
+```
+### 6. MOD()
+
+Returns the remainder after division.
+```sql
+SELECT MOD(15,4);
+```
+Determine whether employee IDs are even or odd.
+```sql
+SELECT employeesid,
+       MOD(employeesid,2) AS remainder
+FROM employees;
+```
+### 7. POWER()
+
+Raises a number to the specified power.
+
+```sql
+SELECT POWER(2,5);
+```
+Calculate salary squared.
+```
+SELECT name,
+       POWER(salary,2)
+FROM employees;
+```
+### 8. SQRT()
+
+Returns the square root.
+```sql
+SELECT SQRT(81);
+```
+### 9. CBRT()
+
+Returns the cube root.
+```sql
+SELECT CBRT(125);
+```
+### 10. RANDOM()
+
+Returns a random number between 0 and 1.
+```sql
+SELECT RANDOM();
+```
+### 11. SIGN()
+
+Returns the sign of a number.
+
+1 → Positive
+0 → Zero
+-1 → Negative
+
+```sql
+SELECT SIGN(-250);
+```
+```sql
+SELECT SIGN(0);
+```
+```sql
+SELECT SIGN(250);
+```
+
+
+### 12. PI()
+
+Returns the value of π (3.141592653589793).
+```sql
+SELECT PI();
+```
+
+```sql
+SELECT PI() * POWER(10,2) AS area;
+```
+### 13. EXP()
+
+Returns e raised to the specified power.
+```sql
+SELECT EXP(2);
+```
+### 14. LN()
+
+Returns the natural logarithm.
+```sql
+SELECT LN(100);
+```
+### 15. LOG()
+
+Returns the logarithm.
+```sql
+SELECT LOG(1000);
+```
+### 16. GREATEST()
+
+Returns the largest value.
+
+```sql
+SELECT GREATEST(50,80,65,90);
+```
+```sql
+SELECT e.name,
+       GREATEST(e.salary,d.budget)
+FROM employees e
+JOIN "Departments" d
+ON e.department=d.departmentname;
+```
+### 17. LEAST()
+
+Returns the smallest value.
+```sql
+SELECT LEAST(50,80,65,90);
+```
+```sql
+SELECT e.name,
+       LEAST(e.salary,d.budget)
+FROM employees e
+JOIN "Departments" d
+ON e.department=d.departmentname;
+```
+### 18. WIDTH_BUCKET()
+
+Assigns a value to a bucket (histogram).
+
+```sql
+SELECT WIDTH_BUCKET(75,0,100,5);
+```
+```SELECT name,
+       salary,
+       WIDTH_BUCKET(salary,30000,100000,5) AS salary_bucket
+FROM employees;
+```
