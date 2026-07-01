@@ -1181,21 +1181,21 @@ WHERE name LIKE '_____';
 ```
 
 ### LIKE Wildcard Summary
-Pattern	Meaning	Example Match
-'A%'	Starts with A	Alice, Andrew
-'%e'	Ends with e	Alice, Charlie
-'%ar%'	Contains "ar"	Charlie
-'A_'	A + exactly one character	Al
-'_____'	Exactly 5 characters	Alice, David
-'__r%'	Third letter is r	Charlie
+>Pattern	Meaning	Example Match
+>'A%'	Starts with A	Alice, Andrew
+>'%e'	Ends with e	Alice, Charlie
+>'%ar%'	Contains "ar"	Charlie
+>'A_'	A + exactly one character	Al
+>'_____'	Exactly 5 characters	Alice, David
+>'__r%'	Third letter is r	Charlie
 
 ### Key Points
-LIKE is used for pattern matching in text columns.
-% matches zero or more characters.
-_ matches exactly one character.
-Use NOT LIKE to exclude matching patterns.
-LIKE is commonly used with WHERE, AND, OR, ORDER BY, and JOIN.
-Use = for exact matches and LIKE for pattern-based matches.
+>LIKE is used for pattern matching in text columns.
+>% matches zero or more characters.
+>_ matches exactly one character.
+>Use NOT LIKE to exclude matching patterns.
+>LIKE is commonly used with WHERE, AND, OR, ORDER BY, and JOIN.
+>Use = for exact matches and LIKE for pattern-based matches.
 
 
 ## ANY
@@ -1207,11 +1207,11 @@ A condition is TRUE if it matches at least one value returned by the subquery.
 Note: ANY is always used with a comparison operator (=, >, <, >=, <=, <>) and a subquery.
 
 ### Key Points
-ANY is always used with a subquery.
-It works with comparison operators such as =, >, <, >=, <=, and <>.
-The condition is TRUE if at least one comparison succeeds.
-= ANY (subquery) is equivalent to IN (subquery).
-ANY is commonly used when comparing a value against a dynamic set of values returned by another query.
+>ANY is always used with a subquery.
+>It works with comparison operators such as =, >, <, >=, <=, and <>.
+>The condition is TRUE if at least one comparison succeeds.
+>= ANY (subquery) is equivalent to IN (subquery).
+>ANY is commonly used when comparing a value against a dynamic set of values returned by another query.
 
 ### Syntax:
 ```sql
@@ -1251,11 +1251,11 @@ ALL: The condition must be true for every value returned by the subquery.
 ### Arithmetic
 
 ### Key Points
-Arithmetic operators perform mathematical calculations on numeric data.
-They can be used in SELECT, WHERE, ORDER BY, HAVING, and aggregate functions.
-Parentheses () control the order of evaluation.
-Arithmetic operations involving NULL return NULL; use COALESCE() when appropriate.
-Integer division returns an integer result. Use decimal values or CAST() to get fractional results.
+>Arithmetic operators perform mathematical calculations on numeric data.
+>They can be used in SELECT, WHERE, ORDER BY, HAVING, and aggregate functions.
+>Parentheses () control the order of evaluation.
+>Arithmetic operations involving NULL return NULL; use COALESCE() when appropriate.
+>Integer division returns an integer result. Use decimal values or CAST() to get fractional results.
 
 | Operator | Description         | Example         |
 | -------- | ------------------- | --------------- |
@@ -1300,6 +1300,72 @@ SELECT name,
        salary,
        salary % 1000 AS Remainder
 FROM employees;
+```
+## Comparison
+
+>Comparison operators are used to compare two values.
+
+>They are most commonly used in the WHERE clause to filter rows, but they can also be used in CASE, HAVING, and other SQL expressions.
+
+| Operator     | Description              | Example              |
+| ------------ | ------------------------ | -------------------- |
+| `=`          | Equal to                 | `salary = 70000`     |
+| `<>` or `!=` | Not equal to             | `department <> 'HR'` |
+| `>`          | Greater than             | `salary > 80000`     |
+| `<`          | Less than                | `salary < 50000`     |
+| `>=`         | Greater than or equal to | `salary >= 70000`    |
+| `<=`         | Less than or equal to    | `salary <= 60000`    |
+
+>Note: PostgreSQL supports both <> and !=, but <> is the SQL standard.
+
+### 1. Equal To (=)
+```sql
+SELECT name,
+       department
+FROM employees
+WHERE department = 'Engineering';
+```
+### 2. Not Equal To (<>)
+```sql
+SELECT name,
+       department
+FROM employees
+WHERE department <> 'HR';
+```
+Equivalent:
+```sql
+SELECT name,
+       department
+FROM employees
+WHERE department != 'HR';
+```
+### 3. Greater Than (>)
+```sql
+SELECT name,
+       salary
+FROM employees
+WHERE salary > 80000;
+```
+### 4. Less Than (<)
+```sql
+SELECT name,
+       salary
+FROM employees
+WHERE salary < 50000;
+```
+### 5. Greater Than or Equal To (>=)
+```sql
+SELECT name,
+       salary
+FROM employees
+WHERE salary >= 70000;
+```
+### 6. Less Than or Equal To (<=)
+```sql
+SELECT name,
+       salary
+FROM employees
+WHERE salary <= 60000;
 ```
 
 
